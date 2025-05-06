@@ -2,7 +2,7 @@ const pool = require("../config/database");
 
 const getAllPagamentos = async () => {
     const result = await pool.query(
-        `SELECT pagamentos.*, contas.name AS contas_name 
+        `SELECT pagamentos.*, contas.nome AS contas_nome 
         FROM pagamentos 
         LEFT JOIN contas ON pagamentos.conta_id = contas.id`
     );
@@ -11,7 +11,7 @@ const getAllPagamentos = async () => {
 
 const getPagamentoById = async (id) => {
     const result = await pool.query(
-        `SELECT pagamentos.*, contas.name AS contas_name 
+        `SELECT pagamentos.*, contas.nome AS contas_nome 
         FROM pagamentos 
         LEFT JOIN contas ON pagamentos.conta_id = contas.id 
         WHERE pagamentos.id = $1`,

@@ -12,7 +12,7 @@ const getAllPagamentos = async (valor) => {
         `SELECT pagamentos.*, contas.name AS contas_name
         FROM pagamentos
         LEFT JOIN contas ON pagamentos.conta_id = contas.id
-        WHERE pagamentos.valor ILIKE $1`, [`%${valor}%`]
+        WHERE pagamentos.valor = ${valor}`
     }
 };
 

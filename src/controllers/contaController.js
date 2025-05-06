@@ -24,7 +24,8 @@ const getConta = async (req, res) => {
 const createConta = async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
-        const newConta = await contaModel.createConta(nome, email, senha);
+        const photo = req.file ? req.file.filename : null;
+        const newConta = await contaModel.createConta(nome, email, senha, photo);
         res.status(201).json(newConta);
     } catch (error) {
 	console.log(error);

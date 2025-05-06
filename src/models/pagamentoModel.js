@@ -1,12 +1,19 @@
 const pool = require("../config/database");
 
-const getAllPagamentos = async () => {
-    const result = await pool.query(
-        `SELECT pagamentos.*, contas.nome AS contas_nome 
-        FROM pagamentos 
-        LEFT JOIN contas ON pagamentos.conta_id = contas.id`
-    );
-    return result.rows;
+const getAllPagamentos = async (valor) => {
+    if (!valor) {
+        const result = await pool.query(
+            `SELECT pagamentos.*, contas.name AS contas_name 
+            FROM pagamentos 
+            LEFT JOIN contas ON pagamentos.conta_id = contas.id`
+        );
+        return result.rows; 
+    } else {
+        `SELECT pagamentos.*, contas.name AS contas_name
+        FROM pagamentos
+        LEFT JOIN contas ON pagamentos.conta_id = contas.id
+        WHERE pagamentos.valor ILIKE $1`, [`%${valor}%`]
+    }
 };
 
 const getPagamentoById = async (id) => {

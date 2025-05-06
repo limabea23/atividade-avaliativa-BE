@@ -2,7 +2,8 @@ const pagamentoModel = require("../models/pagamentoModel");
 
 const getAllPagamentos = async (req, res) => {
     try {
-        const pagamentos = await pagamentoModel.getAllPagamentos();
+        const { valor } = req.query;
+        const pagamentos = await pagamentoModel.getAllPagamentos(valor);
         res.json(pagamentos);
     } catch (error) {
         res.status(500).json({ message: "erro ao buscar pagamentos." });
